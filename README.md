@@ -7,6 +7,15 @@ Our findings also reveal that many LLMs significantly benefit from the use of ty
 
 ---
 
+## Repository Overview
+This repository is organized as follows:
+
+- **[`src/data_creation`](src/data_creation)**: Contains scripts and details for the creation of pretraining data, including preprocessing, annotation generation, and BIO conversion.
+- **[`src/llm_inference`](src/llm_inference)**: Includes code for running LLM inference and evaluation over datasets used in our experiments.
+- **[`src/zeroner`](src/zeroner)**: Core implementation of the ZeroNER framework (available soon).
+
+---
+
 ## Pretrain Data
 Pretraining data in BIO format is available for download [here](https://drive.google.com/file/d/1slUHvSIP0yrzNJBIJivBRWe0Z10fjlM1/view?usp=sharing).
 
@@ -26,11 +35,7 @@ The pretraining data was derived from the first 50,000 passages of the Pile unce
 
 ---
 
-### Repository Overview
-This repository is organized as follows:
-
-- **[`src/data_creation`](src/data_creation)**: Contains scripts and details for the creation of pretraining data, including preprocessing, annotation generation, and BIO conversion.
-- **[`src/llm_inference`](src/llm_inference)**: Includes code for running LLM inference and evaluation over datasets used in our experiments.
-- **[`src/zeroner`](src/zeroner)**: Core implementation of the ZeroNER framework (available soon).
+## Model Checkpoint 
+The ZeroNER checkpoint is available for download [here](https://drive.google.com/drive/folders/1VAPfd5xzir-4vxj-P5l4j9_4wbdchuRi?usp=sharing).
 
 
