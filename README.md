@@ -5,6 +5,8 @@ Evaluated on three real-world zero-shot benchmarks under a rigorous *hard* zero-
 
 Our findings also reveal that many LLMs significantly benefit from the use of type descriptions, highlighting their potential in advancing zero-shot NER.
 
+---
+
 ## Pretrain Data
 Pretraining data in BIO format is available for download [here](https://drive.google.com/file/d/1slUHvSIP0yrzNJBIJivBRWe0Z10fjlM1/view?usp=sharing).
 
@@ -21,3 +23,14 @@ The pretraining data was derived from the first 50,000 passages of the Pile unce
 - Splitting each passage into varying token lengths (using the BERT tokenizer), ranging from 30 to 300 tokens. This variation helps the student model adapt to different input lengths.
 - Ignoring sentences from specific subsets, including: [Ubuntu IRC, DM Mathematics, EuroParl, GitHub, StackExchange]
 - Removing all non-English text using [lingua-py](https://github.com/pemistahl/lingua-py).
+
+---
+
+### Repository Overview
+This repository is organized as follows:
+
+- **[`src/data_creation`](src/data_creation)**: Contains scripts and details for the creation of pretraining data, including preprocessing, annotation generation, and BIO conversion.
+- **[`src/llm_inference`](src/llm_inference)**: Includes code for running LLM inference and evaluation over datasets used in our experiments.
+- **[`src/zeroner`](src/zeroner)**: Core implementation of the ZeroNER framework (available soon).
+
+
