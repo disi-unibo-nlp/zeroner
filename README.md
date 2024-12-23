@@ -6,6 +6,46 @@ Evaluated on three real-world zero-shot benchmarks under a rigorous *hard* zero-
 Our findings also reveal that many LLMs significantly benefit from the use of type descriptions, highlighting their potential in advancing zero-shot NER.
 
 ---
+## Quick Start
+
+The **ZeroNER checkpoint** is available for download [here](https://drive.google.com/drive/folders/1VAPfd5xzir-4vxj-P5l4j9_4wbdchuRi?usp=sharing).
+
+We have integrated our model within the [IBM Zshot library](https://github.com/IBM/zshot) for a quick and easy use for the user. Also, a full support is allowed for OntoNotes-ZS dataset with corresponding descriptions. Process is still ongoing and we plan to integrate both MedMentions-ZS and LegalNER-ZS, as well as future datasets.
+
+```python
+import spacy
+import datasets
+
+from zshot import PipelineConfig, displacy
+from zshot.linker import LinkerSMXM
+from zshot.utils.data_models import Entity
+
+
+entities = [
+    Entity(name='FAC', description='Names of man-made structures: infrastructure (streets, bridges), buildings, monuments, etc. belong to this type. Buildings that are referred to using the name of the company or organization that uses them should be marked as FAC when they refer to the physical structure of the building itself, usually in a locative way: "I\'m reporting live from right outside [Massachusetts General Hospital]"', vocabulary=None),
+    Entity(name='LOC', description='Names of geographical locations other than GPEs. These include mountain ranges, coasts, borders, planets, geo-coordinates, bodies of water. Also included in this category are named regions such as the Middle East, areas, neighborhoods, continents and regions of continents. Do NOT mark deictics or other non-proper nouns: here, there, everywhere, etc. As with GPEs, directional modifiers such as "southern" are only marked when they are part of the location name itself.', vocabulary=None),
+    Entity(name='WORK_OF_ART', description='Titles of books, songs, television programs and other creations. Also includes awards. These are usually surrounded by quotation marks in the article (though the quotations are not included in the annotation). Newspaper headlines should only be marked if they are referential. In other words the headline of the article being annotated should not be marked but if in the body of the text here is a reference to an article, then it is markable as a work of art.', vocabulary=None)
+]
+
+nlp = spacy.blank("en")
+nlp_config = PipelineConfig(
+    linker=LinkerSMXM(model_name="zeroner_base"),
+    entities=entities,
+    device='cuda'
+)
+
+nlp.add_pipe("zshot", config=nlp_config, last=True)
+
+text = """
+I remember the SMS was written like this at that time , saying that , ah , there was a sewage pipe leakage accident on the side road at the southeast corner of Jingguang Bridge at East Third Ring Road , and , well , traffic supervision was implemented near Chaoyang Road , Jingguang Bridge , and East Third Ring Road , and requesting cars to make a detour .
+"""
+
+doc = nlp(text)
+displacy.serve(doc, style="ent")
+```
+Output:
+
+---
 
 ## Repository Overview
 This repository is organized as follows:
