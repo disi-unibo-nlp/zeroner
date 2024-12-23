@@ -10,7 +10,7 @@ Our findings also reveal that many LLMs significantly benefit from the use of ty
 
 The **ZeroNER checkpoint** is available for download [here](https://drive.google.com/drive/folders/1VAPfd5xzir-4vxj-P5l4j9_4wbdchuRi?usp=sharing).
 
-We have integrated our model within the [IBM Zshot library](https://github.com/IBM/zshot) for a quick and easy use for the user. Also, a full support is allowed for OntoNotes-ZS dataset with corresponding descriptions. Process is still ongoing and we plan to integrate both MedMentions-ZS and LegalNER-ZS, as well as future datasets.
+We integrated our model into the [IBM Zshot library](https://github.com/IBM/zshot), enabling users to quickly and easily deploy ZeroNER in their workflows.
 
 ```python
 import spacy
@@ -44,6 +44,10 @@ doc = nlp(text)
 displacy.serve(doc, style="ent")
 ```
 Output:
+
+![ZeroNER use example](images/displacy_example.png)
+
+We have created a free [Google Colab notebook](https://colab.research.google.com/drive/1IVrTIqIlsARraI6pM-mVdYHIzNAo4Ap1?usp=sharing) to help you explore the library and customize it for your specific use case with ease.
 
 ---
 
