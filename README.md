@@ -6,6 +6,12 @@ Evaluated on three real-world zero-shot benchmarks under a rigorous *hard* zero-
 Our findings also reveal that many LLMs significantly benefit from the use of type descriptions, highlighting their potential in advancing zero-shot NER.
 
 ---
+## ⚠️ UPDATE: Inference Time Cost
+We compare the inference time of ZeroNER and GLiNER on a GPU Tesla T4 using a [Google Colab notebook](https://colab.research.google.com/drive/1A5tcfSTjZ5HVQSKSJ4nlovr5O9G3EUoi?usp=sharing) for easy replication.
+
+ZeroNER is seamlessly integrated into the [IBM Zshot library](https://github.com/IBM/zshot), which also supports GLiNER. This integration allows for straightforward evaluation and comparison of the two models.
+
+---
 
 ## Quick Start
 
