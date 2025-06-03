@@ -16,41 +16,41 @@ from typing import Optional
 from dataclasses import dataclass, field
 from collections import Counter, defaultdict 
 
-DESCRIPTIONS = {
-    "MedMentions-ZS": {
-        'BACTERIUM': 'A small, typically one-celled, prokaryotic micro-organism. Virtually all animal life on earth is dependent on bacteria for their survival as only bacteria and some archea possess the genes and enzymes necessary to synthesize vitamin B12, also known as cobalamin, and provide it through the food chain. Vitamin B12 is a water-soluble vitamin that is involved in the metabolism of every cell of the human body. It is a cofactor in DNA synthesis, and in both fatty acid and amino acid metabolism. It is particularly important in the normal functioning of the nervous system via its role in the synthesis of myelin.',
-        'T007': 'A small, typically one-celled, prokaryotic micro-organism. Virtually all animal life on earth is dependent on bacteria for their survival as only bacteria and some archea possess the genes and enzymes necessary to synthesize vitamin B12, also known as cobalamin, and provide it through the food chain. Vitamin B12 is a water-soluble vitamin that is involved in the metabolism of every cell of the human body. It is a cofactor in DNA synthesis, and in both fatty acid and amino acid metabolism. It is particularly important in the normal functioning of the nervous system via its role in the synthesis of myelin.',
-        'BODY_SUBSTANCE': 'Extracellular material, or mixtures of cells and extracellular material, produced, excreted, or accreted by the body. Included here are substances such as saliva, dental enamel, sweat, and gastric acid.',
-        'T031': 'Extracellular material, or mixtures of cells and extracellular material, produced, excreted, or accreted by the body. Included here are substances such as saliva, dental enamel, sweat, and gastric acid.',
-        'FOOD': 'Any substance generally containing nutrients, such as carbohydrates, proteins, and fats, that can be ingested by a living organism and metabolized into energy and body tissue. Some foods are naturally occurring, others are either partially or entirely made by humans.',
-        'T168': 'Any substance generally containing nutrients, such as carbohydrates, proteins, and fats, that can be ingested by a living organism and metabolized into energy and body tissue. Some foods are naturally occurring, others are either partially or entirely made by humans.',
-        'BODY_SYSTEM': 'A complex of anatomical structures that performs a common function.', 
-        'T022': 'A complex of anatomical structures that performs a common function.', 
-        'PROFESSIONAL_OR_OCCUPATIONAL_GROUP': 'An individual or individuals classified according to their vocation.', 
-        'T097': 'An individual or individuals classified according to their vocation.', 
-    },
-    "OntoNotes-ZS": {
-        'FAC': 'Names of man-made structures: infrastructure (streets, bridges), buildings, monuments, etc. belong to this type. Buildings that are referred to using the name of the company or organization that uses them should be marked as FAC when they refer to the physical structure of the building itself, usually in a locative way: "I\'m reporting live from right outside [Massachusetts General Hospital]',
-        'LOC': 'Names of geographical locations other than GPEs. These include mountain ranges, coasts, borders, planets, geo-coordinates, bodies of water. Also included in this category are named regions such as the Middle East, areas, neighborhoods, continents and regions of continents. Do NOT mark deictics or other non-proper nouns: here, there, everywhere, etc. As with GPEs, directional modifiers such as "southern" are only marked when they are part of the location name itself.',
-        'WORK_OF_ART': 'Titles of books, songs, television programs and other creations. Also includes awards. These are usually surrounded by quotation marks in the article (though the quotations are not included in the annotation). Newspaper headlines should only be marked if they are referential. In other words the headline of the article being annotated should not be marked but if in the body of the text here is a reference to an article, then it is markable as a work of art.', 
-    },
-    "LegalNER-ZS": {
-        'GPE': 'Geopolitical locations that include names of countries, states, cities, districts, or villages mentioned in the judgment.',
-        'PRECEDENT': 'All the past court cases referred to in the judgment as precedent. The precedent consists of party names, citation (optional), or case number (optional).',
-        'CASE_NUMBER': 'All the other case numbers mentioned in the judgment (apart from precedent) where party names and citation are not provided.',
-        'WITNESS': 'The name of witnesses mentioned in the current judgment.'
-    }
+
+with open('data/entity_type_mapping/zeroner_descr_map.json', 'r') as f:
+    DESCRIPTIONS = json.load(f)
+
+name2id = {
+    "MedMentions-ZS": "medmentions",
+    "OntoNotes-ZS": "ontonotes",
+    "LegalNER-ZS": "legalner"
 }
 
+
 # for medmentions label mapping
-def medmentions_type_dict_inv():
-    return {'T058': "Health_Care_Activity", "T062": "Research_Activity", "T037": "Injury_or_Poisoning",
+id2tag =  {'T058': "Health_Care_Activity", "T062": "Research_Activity", "T037": "Injury_or_Poisoning",
             "T038": "Biologic_Function", "T005": "Virus", "T007": "Bacterium", "T204": "Eukaryote",
             "T017": "Anotomical_Structure", "T074": "Medical_Device", "T031": "Body_Substance", "T103": "Chemical",
             "T168": "Food", "T201": "Clinical_Attribute", "T033": "Finding", "T082": "Spatial_Concept",
             "T022": "Body_System", "T091": "Biomedical_Occupation_or_Discipline", "T092": "Organization",
             "T097": "Professional_or_Occupational_Group", "T098": "Population_Group", "T170": "Intellectual_Product",
             "NEG": "NEG"}
+
+def medmentions_type_dict_inv():
+    """
+    Inverse mapping of MedMentions entity types to their corresponding IDs.
+    
+    Returns:
+        dict: A dictionary where keys are entity type IDs and values are the corresponding entity type names.
+    """
+    return {v: k for k, v in id2tag.items()}
+
+def convert_medmentions(example):
+        tokens = example['tokens']
+        ner_tags = example['ner_tags']
+        example = [ (x[:2] + id2tag[x[2:]]).upper() if x != 'O' else 'O' for x in ner_tags]
+        return {'tokens': tokens, 'ner_tags': example}
+    
 
 def read_dataset(file_path, dataset):
     with open(file_path, "r") as f:
@@ -102,7 +102,7 @@ def list_all_labels(file_path):
 @dataclass
 class ScriptArguments:
     model_name: Optional[str] = field(default="Qwen/Qwen2.5-7B-Instruct", metadata={"help": "model's HF directory or local path"})
-    out_preds_dir: Optional[str] =  field(default="output/llm/predictions", metadata={"help": "outputs directory"})
+    out_preds_dir: Optional[str] =  field(default="out/llm/predictions", metadata={"help": "outputs directory"})
     max_samples: Optional[int] = field(default=-1, metadata={"help": "Maximum number of data to process in train set. Default is -1 to process all data."})
     batch_size: Optional[int] = field(default=100, metadata={"help": "Maximum number of data to process per batch."})
     cache_dir: Optional[str] =  field(default="./models", metadata={"help": "cache dir to store model weights"})
@@ -155,8 +155,8 @@ if __name__ == "__main__":
         gpu_memory_utilization=.9,    
         max_model_len=2048,
         dtype="half" if "awq" in args.model_name.lower() else "auto",
-        quantization="awq" if "awq" in args.model_name.lower() else None,
-        download_dir= "../medgnp/hf_cache",#"../../../preprocess/models",#"../chatbot/models",#"../preprocess/models",# #args.cache_dir,
+        quantization="awq_merlin" if "awq" in args.model_name.lower() else None,
+        #download_dir= "../medgnp/hf_cache",#"../../../preprocess/models",#"../chatbot/models",#"../preprocess/models",# #args.cache_dir,
         enforce_eager=True,
         trust_remote_code=True
     )
@@ -170,12 +170,12 @@ You can use only the possible labels provided. No other label is allowed.
 Provide output in the following format: 
 Return a list, marked with square brackets '[' and ']', containing string tuples. 
 Each tuple should follow the pattern: ("entity", "label"). 
-Prefix the entire list with '###entities:'. 
+Prefix the entire list with '### entities:'. 
 For example: 
-###entities: [("entity 1", "label of entity 1"), ("entity 2", "label of entity 2"), ...]
+### entities: [("entity 1", "label of entity 1"), ("entity 2", "label of entity 2"), ...]
 
 If no entities are found, return an empty list like this: 
-###entities: []
+### entities: []
 
 Don't add further information.
 """
@@ -195,6 +195,9 @@ Sentence: {sentence}
             sentences, labels = read_dataset(f"data/dataset/{dataset}/test.bio.txt", dataset=dataset)
             dataset_test = Dataset.from_pandas(pd.DataFrame([{"tokens": s, "ner_tags": l} for s, l in zip(sentences, labels)]))
         
+        if "medmentions" in dataset.lower():
+            dataset_test = dataset_test.map(convert_medmentions)
+
         w_descriptions = args.w_descriptions
         sentences = dataset_test['tokens']
         sentences = [" ".join(s) for s in sentences]
@@ -223,7 +226,7 @@ Sentence: {sentence}
                 print("label name:", list_of_labels_names)
                 list_of_labels_string = ""
                 for name in list_of_labels_names:
-                    list_of_labels_string += (name + ": " + DESCRIPTIONS[dataset][name] + "\n")
+                    list_of_labels_string += (name + ": " + DESCRIPTIONS[name2id[dataset]]['test'][name] + "\n")
                 list_of_labels_string = "\n" + list_of_labels_string.strip()
                 prompt = PROMPT_TEMPLATE.format(sentence=sentence, labels=list_of_labels_string)
 
@@ -245,11 +248,11 @@ Sentence: {sentence}
     
         batches = [prompts[i:i+args.batch_size] for i in range(0, len(prompts), args.batch_size)]
 
-        os.makedirs(f"output/llm/prompts/{MODEL_NAME}", exist_ok=True)
-        os.makedirs("output/llm/out", exist_ok=True)
+        os.makedirs(f"out/llm/prompts/{MODEL_NAME}", exist_ok=True)
+        os.makedirs("out/llm/out", exist_ok=True)
         # save first prompt to txt file
-        with open(f'./output/llm/prompts/{MODEL_NAME}/{dataset}_desc_{w_descriptions}.txt', 'w') as f:
-            for i in range(1):
+        with open(f'./out/llm/prompts/{MODEL_NAME}/{dataset}_desc_{w_descriptions}.txt', 'w') as f:
+            for i in range(5):
                 f.write(prompts[i][0])
                 f.write("*"*100+'\n')
 
@@ -270,7 +273,7 @@ Sentence: {sentence}
                         split = o.text.split('### entities:')
                     prediction = split[-1].strip()
                     try:
-                        completion_filename = f"output/llm/predictions/{MODEL_NAME}/{dataset}/completion.txt"
+                        completion_filename = f"out/llm/predictions/{MODEL_NAME}/{dataset}/completion.txt"
                         if w_descriptions:
                             completion_filename = completion_filename.replace(".txt","")
                             completion_filename += "_w_descriptions.txt"
@@ -287,8 +290,8 @@ Sentence: {sentence}
                     dataset = batch_items[id_out]['dataset']
                     sentence = batch_items[id_out]['sentence']
 
-                    os.makedirs(f"output/llm/predictions/{MODEL_NAME}/{dataset}/", exist_ok=True)
-                    out_filename = f'output/llm/predictions/{MODEL_NAME}/{dataset}/predictions.txt'
+                    os.makedirs(f"out/llm/predictions/{MODEL_NAME}/{dataset}/", exist_ok=True)
+                    out_filename = f'out/llm/predictions/{MODEL_NAME}/{dataset}/predictions.txt'
                     if w_descriptions:
                         out_filename = out_filename.replace('.txt','')
                         out_filename += '_w_descriptions.txt'
