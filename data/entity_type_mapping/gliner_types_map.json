@@ -1,0 +1,92 @@
+{
+    "ontonotes": {
+        "validation": {
+            "lowercase": {
+                "NORP": "national religious political",
+                "PRODUCT": "product",
+                "EVENT": "event",
+                "LAW": "law"
+            },
+            "title_case": {
+                "NORP": "National Religious Political",
+                "PRODUCT": "Product",
+                "EVENT": "Event",
+                "LAW": "Law"
+            }
+        },
+        "test": {
+            "lowercase": {
+                "FAC": "facility",
+                "LOC": "location",
+                "WORK_OF_ART": "work of art"
+            },
+            "title_case": {
+                "FAC": "Facility",
+                "LOC": "Location",
+                "WORK_OF_ART": "Work of Art"
+            }
+        }
+    },
+    "medmentions": {
+        "validation": {
+            "lowercase": {
+                "INJURY_OR_POISONING": "injury or poisoning",
+                "VIRUS": "virus",
+                "CLINICAL_ATTRIBUTE": "clinical attribute",
+                "BIOMEDICAL_OCCUPATION_OR_DISCIPLINE": "biomedical occupation or discipline",
+                "ORGANIZATION": "organization"
+            },
+            "title_case": {
+                "INJURY_OR_POISONING": "Injury or Poisoning",
+                "VIRUS": "Virus",
+                "CLINICAL_ATTRIBUTE": "Clinical Attribute",
+                "BIOMEDICAL_OCCUPATION_OR_DISCIPLINE": "Biomedical Occupation or Discipline",
+                "ORGANIZATION": "Organization"
+            }
+        },
+        "test": {
+            "lowercase": {
+                "BODY_SYSTEM": "body system",
+                "FOOD": "food",
+                "BODY_SUBSTANCE": "body substance",
+                "BACTERIUM": "bacterium",
+                "PROFESSIONAL_OR_OCCUPATIONAL_GROUP": "professional or occupational group"
+            },
+            "title_case": {
+                "BODY_SYSTEM": "Body System",
+                "FOOD": "Food",
+                "BODY_SUBSTANCE": "Body Substance",
+                "BACTERIUM": "Bacterium",
+                "PROFESSIONAL_OR_OCCUPATIONAL_GROUP": "Professional or Occupational Group"
+            }
+        }
+    },
+    "legalner": {
+        "validation": {
+            "lowercase": {
+                "JUDGE": "judge",
+                "ORG": "organization",
+                "STATUTE": "statute"
+            },
+            "title_case": {
+                "JUDGE": "Judge",
+                "ORG": "Organization",
+                "STATUTE": "Statute"
+            }
+        },
+        "test": {
+            "lowercase": {
+                "GPE": "geopolitical entity",
+                "PRECEDENT": "precedent",
+                "CASE_NUMBER": "case number",
+                "WITNESS": "witness"
+            },
+            "title_case": {
+                "GPE": "Geopolitical Entity",
+                "PRECEDENT": "Precedent",
+                "CASE_NUMBER": "Case Number",
+                "WITNESS": "Witness"
+            }
+        }
+    }
+}
