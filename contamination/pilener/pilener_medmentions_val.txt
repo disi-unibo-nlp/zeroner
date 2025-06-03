@@ -1,0 +1,90 @@
+Loading 'Pile-NER-type-IOB' dataset...
+
+🎯 ANALYZING SPLIT: VALIDATION
+================================================================================
+Loading MedMentions Zero-Shot benchmark dataset...
+Benchmark entity types found: 5
+Unique benchmark tags: ['biomedical occupation or discipline', 'clinical attribute', 'injury or poisoning', 'organizationanization', 'virus']
+
+🔍 CONTAMINATION ANALYSIS
+============================================================
+❌ EXACT MATCHES FOUND: 1
+  • virus: 807 instances
+
+🔍 FUZZY MATCHES (similarity >= 0.9):
+Checking fuzzy matches:   0%|          | 0/5 [00:00<?, ?it/s]Checking fuzzy matches:  20%|██        | 1/5 [00:00<00:00,  5.27it/s]Checking fuzzy matches:  60%|██████    | 3/5 [00:00<00:00, 10.15it/s]Checking fuzzy matches: 100%|██████████| 5/5 [00:00<00:00,  8.94it/s]Checking fuzzy matches: 100%|██████████| 5/5 [00:00<00:00,  8.74it/s]
+  ✅ No fuzzy matches found
+
+🔍 WORD BOUNDARY MATCHES:
+Checking word boundaries:   0%|          | 0/5 [00:00<?, ?it/s]Checking word boundaries: 100%|██████████| 5/5 [00:00<00:00, 251.61it/s]
+  • biomedical occupation or discipline → 2663 total instances
+    - occupation: 2535 instances
+    - discipline: 128 instances
+  • clinical attribute → 8658 total instances
+    - attribute: 8634 instances
+    - clinical: 24 instances
+  • injury or poisoning → 106 total instances
+    - injury: 106 instances
+
+🔍 SUBSTRING MATCHES:
+Checking substrings:   0%|          | 0/5 [00:00<?, ?it/s]Checking substrings: 100%|██████████| 5/5 [00:00<00:00, 6189.94it/s]
+  • organizationanization → 68935 total instances
+    - organization: 66352 instances
+    - organ: 1851 instances
+    - org: 608 instances
+    - ion: 123 instances
+    - on: 1 instances
+
+📊 CONTAMINATION METRICS
+============================================================
+Total benchmark entity types: 5
+Contaminated entity types: 5
+Contamination rate: 100.00%
+Contamination severity score: 64.00%
+  - Exact matches (weight 1.0): 1.0
+  - Fuzzy matches (weight 0.8): 0.0
+  - Word boundary matches (weight 0.6): 1.7999999999999998
+  - Substring matches (weight 0.4): 0.4
+================================================================================
+
+🎯 ANALYZING SPLIT: TEST
+================================================================================
+Loading MedMentions Zero-Shot benchmark dataset...
+Benchmark entity types found: 5
+Unique benchmark tags: ['bacterium', 'body substance', 'body system', 'food', 'professional or occupational group']
+
+🔍 CONTAMINATION ANALYSIS
+============================================================
+❌ EXACT MATCHES FOUND: 2
+  • bacterium: 157 instances
+  • food: 4186 instances
+
+🔍 FUZZY MATCHES (similarity >= 0.9):
+Checking fuzzy matches:   0%|          | 0/5 [00:00<?, ?it/s]Checking fuzzy matches:  20%|██        | 1/5 [00:00<00:00,  5.20it/s]Checking fuzzy matches:  40%|████      | 2/5 [00:00<00:00,  6.83it/s]Checking fuzzy matches: 100%|██████████| 5/5 [00:00<00:00, 12.42it/s]
+  • body substance → 1 total instances
+    - bodysubstance: 1 instances (sim: 0.96)
+
+🔍 WORD BOUNDARY MATCHES:
+Checking word boundaries:   0%|          | 0/5 [00:00<?, ?it/s]Checking word boundaries: 100%|██████████| 5/5 [00:00<00:00, 473.85it/s]
+  • professional or occupational group → 8068 total instances
+    - group: 8061 instances
+    - professional: 7 instances
+  • body system → 906 total instances
+    - system: 886 instances
+    - body: 20 instances
+
+🔍 SUBSTRING MATCHES:
+Checking substrings:   0%|          | 0/5 [00:00<?, ?it/s]Checking substrings: 100%|██████████| 5/5 [00:00<00:00, 241051.95it/s]
+  ✅ No substring matches found
+
+📊 CONTAMINATION METRICS
+============================================================
+Total benchmark entity types: 5
+Contaminated entity types: 5
+Contamination rate: 100.00%
+Contamination severity score: 80.00%
+  - Exact matches (weight 1.0): 2.0
+  - Fuzzy matches (weight 0.8): 0.8
+  - Word boundary matches (weight 0.6): 1.2
+  - Substring matches (weight 0.4): 0.0
+================================================================================

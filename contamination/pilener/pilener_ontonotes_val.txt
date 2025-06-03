@@ -1,0 +1,78 @@
+Loading 'Pile-NER-type-IOB' dataset...
+Generating train split:   0%|          | 0/45889 [00:00<?, ? examples/s]Generating train split:  20%|█▉        | 9000/45889 [00:00<00:00, 64178.88 examples/s]Generating train split:  57%|█████▋    | 26000/45889 [00:00<00:00, 114116.59 examples/s]Generating train split:  96%|█████████▌| 44000/45889 [00:00<00:00, 136506.07 examples/s]Generating train split: 100%|██████████| 45889/45889 [00:00<00:00, 125920.36 examples/s]
+
+🎯 ANALYZING SPLIT: VALIDATION
+================================================================================
+Loading Ontonotes Zero-Shot benchmark dataset...
+Benchmark entity types found: 4
+Unique benchmark tags: ['event', 'law', 'national religious political', 'product']
+
+🔍 CONTAMINATION ANALYSIS
+============================================================
+❌ EXACT MATCHES FOUND: 3
+  • event: 11243 instances
+  • law: 2272 instances
+  • product: 38119 instances
+
+🔍 FUZZY MATCHES (similarity >= 0.9):
+Checking fuzzy matches:   0%|          | 0/4 [00:00<?, ?it/s]Checking fuzzy matches:  75%|███████▌  | 3/4 [00:00<00:00, 17.61it/s]Checking fuzzy matches: 100%|██████████| 4/4 [00:00<00:00, 23.46it/s]
+  ✅ No fuzzy matches found
+
+🔍 WORD BOUNDARY MATCHES:
+Checking word boundaries:   0%|          | 0/4 [00:00<?, ?it/s]Checking word boundaries: 100%|██████████| 4/4 [00:00<00:00, 746.95it/s]
+  • national religious political → 20 total instances
+    - political: 19 instances
+    - religious: 1 instances
+
+🔍 SUBSTRING MATCHES:
+Checking substrings:   0%|          | 0/4 [00:00<?, ?it/s]Checking substrings: 100%|██████████| 4/4 [00:00<00:00, 202135.13it/s]
+  ✅ No substring matches found
+
+📊 CONTAMINATION METRICS
+============================================================
+Total benchmark entity types: 4
+Contaminated entity types: 4
+Contamination rate: 100.00%
+Contamination severity score: 90.00%
+  - Exact matches (weight 1.0): 3.0
+  - Fuzzy matches (weight 0.8): 0.0
+  - Word boundary matches (weight 0.6): 0.6
+  - Substring matches (weight 0.4): 0.0
+================================================================================
+
+🎯 ANALYZING SPLIT: TEST
+================================================================================
+Loading Ontonotes Zero-Shot benchmark dataset...
+Benchmark entity types found: 3
+Unique benchmark tags: ['facility', 'location', 'work of art']
+
+🔍 CONTAMINATION ANALYSIS
+============================================================
+❌ EXACT MATCHES FOUND: 2
+  • facility: 1939 instances
+  • location: 58557 instances
+
+🔍 FUZZY MATCHES (similarity >= 0.9):
+Checking fuzzy matches:   0%|          | 0/3 [00:00<?, ?it/s]Checking fuzzy matches: 100%|██████████| 3/3 [00:00<00:00, 31.39it/s]
+  • work of art → 1 total instances
+    - workofart: 1 instances (sim: 0.90)
+
+🔍 WORD BOUNDARY MATCHES:
+Checking word boundaries:   0%|          | 0/3 [00:00<?, ?it/s]Checking word boundaries: 100%|██████████| 3/3 [00:00<00:00, 144631.17it/s]
+  ✅ No word boundary matches found
+
+🔍 SUBSTRING MATCHES:
+Checking substrings:   0%|          | 0/3 [00:00<?, ?it/s]Checking substrings: 100%|██████████| 3/3 [00:00<00:00, 163414.44it/s]
+  ✅ No substring matches found
+
+📊 CONTAMINATION METRICS
+============================================================
+Total benchmark entity types: 3
+Contaminated entity types: 3
+Contamination rate: 100.00%
+Contamination severity score: 93.33%
+  - Exact matches (weight 1.0): 2.0
+  - Fuzzy matches (weight 0.8): 0.8
+  - Word boundary matches (weight 0.6): 0.0
+  - Substring matches (weight 0.4): 0.0
+================================================================================

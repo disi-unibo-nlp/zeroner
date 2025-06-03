@@ -1,0 +1,119 @@
+Loading 'pile-mistral-v0.1-IOB' dataset...
+
+🎯 ANALYZING SPLIT: VALIDATION
+================================================================================
+Loading MedMentions Zero-Shot benchmark dataset...
+Map:   0%|          | 0/1289 [00:00<?, ? examples/s]Map:  95%|█████████▌| 1229/1289 [00:00<00:00, 12195.66 examples/s]Map: 100%|██████████| 1289/1289 [00:00<00:00, 11787.04 examples/s]
+Benchmark entity types found: 5
+Unique benchmark tags: ['biomedical occupation or discipline', 'clinical attribute', 'injury or poisoning', 'organization', 'virus']
+
+🔍 CONTAMINATION ANALYSIS
+============================================================
+❌ EXACT MATCHES FOUND: 2
+  • organization: 19939 instances
+  • virus: 93 instances
+
+🔍 FUZZY MATCHES (similarity >= 0.9):
+Checking fuzzy matches:   0%|          | 0/5 [00:00<?, ?it/s]Checking fuzzy matches:  20%|██        | 1/5 [00:00<00:02,  1.34it/s]Checking fuzzy matches:  80%|████████  | 4/5 [00:01<00:00,  2.26it/s]Checking fuzzy matches: 100%|██████████| 5/5 [00:02<00:00,  1.93it/s]Checking fuzzy matches: 100%|██████████| 5/5 [00:02<00:00,  1.94it/s]
+  ✅ No fuzzy matches found
+
+🔍 WORD BOUNDARY MATCHES:
+Checking word boundaries:   0%|          | 0/5 [00:00<?, ?it/s]Checking word boundaries: 100%|██████████| 5/5 [00:00<00:00, 71.37it/s]
+  • clinical attribute → 261 total instances
+    - attribute: 198 instances
+    - clinical trial: 14 instances
+    - physical attribute: 9 instances
+    - product attribute: 6 instances
+    - game attribute: 6 instances
+    - clinical candidate: 2 instances
+    - team attribute: 2 instances
+    - technical attribute: 2 instances
+    - personal attribute: 2 instances
+    - clinical knowledge: 2 instances
+  • biomedical occupation or discipline → 523 total instances
+    - occupation: 193 instances
+    - disease or disorder: 88 instances
+    - disease or condition: 50 instances
+    - discipline: 37 instances
+    - procedure or treatment: 17 instances
+    - academic discipline: 15 instances
+    - condition or disease: 12 instances
+    - substance or material: 10 instances
+    - disease or syndrome: 8 instances
+    - development or change of shape: 8 instances
+  • injury or poisoning → 293 total instances
+    - disease or disorder: 88 instances
+    - disease or condition: 50 instances
+    - procedure or treatment: 17 instances
+    - condition or disease: 12 instances
+    - injury: 11 instances
+    - substance or material: 10 instances
+    - disease or syndrome: 8 instances
+    - development or change of shape: 8 instances
+    - quality or property: 7 instances
+    - real estate agent or landlord: 5 instances
+
+🔍 SUBSTRING MATCHES:
+Checking substrings:   0%|          | 0/5 [00:00<?, ?it/s]Checking substrings: 100%|██████████| 5/5 [00:00<00:00, 252668.92it/s]
+  ✅ No substring matches found
+
+📊 CONTAMINATION METRICS
+============================================================
+Total benchmark entity types: 5
+Contaminated entity types: 5
+Contamination rate: 100.00%
+Contamination severity score: 76.00%
+  - Exact matches (weight 1.0): 2.0
+  - Fuzzy matches (weight 0.8): 0.0
+  - Word boundary matches (weight 0.6): 1.7999999999999998
+  - Substring matches (weight 0.4): 0.0
+================================================================================
+
+🎯 ANALYZING SPLIT: TEST
+================================================================================
+Loading MedMentions Zero-Shot benchmark dataset...
+Map:   0%|          | 0/1048 [00:00<?, ? examples/s]Map: 100%|██████████| 1048/1048 [00:00<00:00, 11709.66 examples/s]
+Benchmark entity types found: 5
+Unique benchmark tags: ['bacterium', 'body substance', 'body system', 'food', 'professional or occupational group']
+
+🔍 CONTAMINATION ANALYSIS
+============================================================
+❌ EXACT MATCHES FOUND: 4
+  • bacterium: 3 instances
+  • body substance: 14 instances
+  • body system: 1 instances
+  • food: 483 instances
+
+🔍 FUZZY MATCHES (similarity >= 0.9):
+Checking fuzzy matches:   0%|          | 0/5 [00:00<?, ?it/s]Checking fuzzy matches:  80%|████████  | 4/5 [00:01<00:00,  3.48it/s]Checking fuzzy matches: 100%|██████████| 5/5 [00:01<00:00,  4.35it/s]
+  ✅ No fuzzy matches found
+
+🔍 WORD BOUNDARY MATCHES:
+Checking word boundaries:   0%|          | 0/5 [00:00<?, ?it/s]Checking word boundaries: 100%|██████████| 5/5 [00:00<00:00, 198.04it/s]
+  • professional or occupational group → 3953 total instances
+    - group: 2760 instances
+    - disease or disorder: 88 instances
+    - age group: 79 instances
+    - group of people: 66 instances
+    - musical group: 60 instances
+    - disease or condition: 50 instances
+    - political group: 45 instances
+    - ethnic group: 38 instances
+    - professional: 37 instances
+    - patient group: 37 instances
+
+🔍 SUBSTRING MATCHES:
+Checking substrings:   0%|          | 0/5 [00:00<?, ?it/s]Checking substrings: 100%|██████████| 5/5 [00:00<00:00, 233016.89it/s]
+  ✅ No substring matches found
+
+📊 CONTAMINATION METRICS
+============================================================
+Total benchmark entity types: 5
+Contaminated entity types: 5
+Contamination rate: 100.00%
+Contamination severity score: 92.00%
+  - Exact matches (weight 1.0): 4.0
+  - Fuzzy matches (weight 0.8): 0.0
+  - Word boundary matches (weight 0.6): 0.6
+  - Substring matches (weight 0.4): 0.0
+================================================================================

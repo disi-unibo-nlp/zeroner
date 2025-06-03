@@ -1,0 +1,76 @@
+Loading 'Pile-NER-type-IOB' dataset...
+
+🎯 ANALYZING SPLIT: VALIDATION
+================================================================================
+Loading LegalNER Zero-Shot benchmark dataset...
+Benchmark entity types found: 3
+Unique benchmark tags: ['judge', 'organization', 'statute']
+
+🔍 CONTAMINATION ANALYSIS
+============================================================
+❌ EXACT MATCHES FOUND: 2
+  • judge: 43 instances
+  • organization: 66352 instances
+
+🔍 FUZZY MATCHES (similarity >= 0.9):
+Checking fuzzy matches:   0%|          | 0/3 [00:00<?, ?it/s]Checking fuzzy matches: 100%|██████████| 3/3 [00:00<00:00, 37.65it/s]
+  • statute → 4 total instances
+    - statue: 1 instances (sim: 0.92)
+    - statut: 3 instances (sim: 0.92)
+
+🔍 WORD BOUNDARY MATCHES:
+Checking word boundaries:   0%|          | 0/3 [00:00<?, ?it/s]Checking word boundaries: 100%|██████████| 3/3 [00:00<00:00, 144631.17it/s]
+  ✅ No word boundary matches found
+
+🔍 SUBSTRING MATCHES:
+Checking substrings:   0%|          | 0/3 [00:00<?, ?it/s]Checking substrings: 100%|██████████| 3/3 [00:00<00:00, 157286.40it/s]
+  ✅ No substring matches found
+
+📊 CONTAMINATION METRICS
+============================================================
+Total benchmark entity types: 3
+Contaminated entity types: 3
+Contamination rate: 100.00%
+Contamination severity score: 93.33%
+  - Exact matches (weight 1.0): 2.0
+  - Fuzzy matches (weight 0.8): 0.8
+  - Word boundary matches (weight 0.6): 0.0
+  - Substring matches (weight 0.4): 0.0
+================================================================================
+
+🎯 ANALYZING SPLIT: TEST
+================================================================================
+Loading LegalNER Zero-Shot benchmark dataset...
+Benchmark entity types found: 4
+Unique benchmark tags: ['case number', 'gpe', 'precedent', 'witness']
+
+🔍 CONTAMINATION ANALYSIS
+============================================================
+❌ EXACT MATCHES FOUND: 1
+  • gpe: 256 instances
+
+🔍 FUZZY MATCHES (similarity >= 0.9):
+Checking fuzzy matches:   0%|          | 0/4 [00:00<?, ?it/s]Checking fuzzy matches:  75%|███████▌  | 3/4 [00:00<00:00, 16.30it/s]Checking fuzzy matches: 100%|██████████| 4/4 [00:00<00:00, 13.67it/s]
+  ✅ No fuzzy matches found
+
+🔍 WORD BOUNDARY MATCHES:
+Checking word boundaries:   0%|          | 0/4 [00:00<?, ?it/s]Checking word boundaries: 100%|██████████| 4/4 [00:00<00:00, 267.90it/s]
+  • case number → 9758 total instances
+    - number: 9687 instances
+    - case: 71 instances
+
+🔍 SUBSTRING MATCHES:
+Checking substrings:   0%|          | 0/4 [00:00<?, ?it/s]Checking substrings: 100%|██████████| 4/4 [00:00<00:00, 2455.32it/s]
+  ✅ No substring matches found
+
+📊 CONTAMINATION METRICS
+============================================================
+Total benchmark entity types: 4
+Contaminated entity types: 2
+Contamination rate: 50.00%
+Contamination severity score: 40.00%
+  - Exact matches (weight 1.0): 1.0
+  - Fuzzy matches (weight 0.8): 0.0
+  - Word boundary matches (weight 0.6): 0.6
+  - Substring matches (weight 0.4): 0.0
+================================================================================
