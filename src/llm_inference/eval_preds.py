@@ -84,11 +84,11 @@ def read_dataset(file_path):
 
 def llm_predictions_to_bio(model_name, dataset_name, filename="predictions.txt", w_descriptions=False):
   if not w_descriptions:
-    file_to_open = f"output/llm/predictions/{model_name}/{dataset_name}/{filename}"
+    file_to_open = f"out/llm/predictions/{model_name}/{dataset_name}/{filename}"
   else:
     filename = filename.replace(".txt", "")
     filename += "_w_descriptions.txt"
-    file_to_open = f"output/llm/predictions/{model_name}/{dataset_name}/{filename}"
+    file_to_open = f"out/llm/predictions/{model_name}/{dataset_name}/{filename}"
   #lettura delle predizioni dal file e conversione
   with open(file_to_open, 'r') as f:
     lines = f.readlines()
@@ -122,9 +122,10 @@ def llm_predictions_to_bio(model_name, dataset_name, filename="predictions.txt",
     from datasets import load_dataset
     
     if dataset_name == "MedMentions-ZS":
-      dataset = load_dataset("ibm/MedMentions-ZS", split="test")
+      dataset = load_dataset("alecocc/MedMentions-ZS", split="test")
     if dataset_name == "OntoNotes-ZS":
       dataset = load_dataset("alecocc/OntoNotes-ZS", split="test")
+      #dataset = load_ontonotes_zs('test')
     if dataset_name == "LegalNER-ZS":
       dataset = load_dataset("alecocc/LegalNER-ZS", split="test")
 
@@ -182,8 +183,8 @@ for dataset_name  in datasets:
 
   print("F1 macro ", f1_macro)
   #print("F1 macro zero_division=1", f1_macro_2)
-  os.makedirs(f"output/llm/results/{model_name}", exist_ok=True)
-  with open(f"output/llm/results/{model_name}/res_{dataset_name}_2.jsonl", 'a') as f:
+  os.makedirs(f"out/llm/results/{model_name}", exist_ok=True)
+  with open(f"out/llm/results/{model_name}/res_{dataset_name}_2.jsonl", 'a') as f:
       result = {
         "model": model_name,
         "w_desc": w_descriptions,
